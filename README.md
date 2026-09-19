@@ -1,5 +1,5 @@
 # DataGrokr
-# CLI Grade Calculator
+# Week - 1 CLI Grade Calculator
 
 A beginner-friendly Python CLI Grade Calculator that calculates student grades using functions, loops, dictionaries, lists, tuples, sets, file handling, and exception handling.
 
@@ -204,3 +204,40 @@ The program handles:
 ## Learning Objective
 
 The main objective of this project is to practice Python fundamentals by building a simple command-line application without using external frameworks or advanced concepts.
+
+# Week - 2 OOP Bank Account
+
+A simple **Object-Oriented Programming (OOP) Banking System** built using Python. The project allows users to perform basic banking operations such as deposits, withdrawals, balance checking, and transaction history management. It also uses **Pandas** to save and analyze transaction data stored in a CSV file.
+
+## Features
+
+- Create and manage a bank account
+- Deposit money
+- Withdraw money
+- Check current balance
+- View transaction history
+- Save transactions to a CSV file
+- Analyze transaction data using Pandas
+- Calculate total transactions
+- Calculate total deposits
+- Calculate total withdrawals
+- Calculate average transaction amount
+- Find maximum and minimum transactions
+- Handle insufficient balance and invalid amounts
+
+## Technologies Used
+
+- Python
+- Pandas
+- CSV
+- Object-Oriented Programming
+
+## Project Structure
+
+```text
+OOP-Bank-Account/
+│
+├── bank_account.py
+├── transactions.csv
+├── README.md
+└── requirements.txt

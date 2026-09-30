@@ -1,5 +1,9 @@
 # DataGrokr
 
+This repository contains my weekly Python projects completed as part of the DataGrokr training program.
+
+---
+
 # Week - 1 CLI Grade Calculator
 
 A beginner-friendly Python CLI Grade Calculator that calculates student grades using functions, loops, dictionaries, lists, tuples, sets, file handling, and exception handling.
@@ -44,6 +48,8 @@ The calculator uses the following subjects:
 A student must score at least 50 marks in every subject to PASS.
 
 ## Concepts Covered
+
+This project covers the following Week 1 Python fundamentals:
 
 - Data types
 - Variables
@@ -181,7 +187,11 @@ The main objective of this project is to practice Python fundamentals by buildin
 
 Week - 2 OOP Bank Account
 
-A simple Object-Oriented Programming (OOP) Banking System built using Python. The project allows users to perform basic banking operations such as deposits, withdrawals, balance checking, and transaction history management. It also uses Pandas to save and analyze transaction data stored in a CSV file.
+A simple Object-Oriented Programming (OOP) Banking System built using Python.
+
+The project allows users to perform basic banking operations such as deposits, withdrawals, balance checking, and transaction history management.
+
+It also uses Pandas to save and analyze transaction data stored in a CSV file.
 
 Features
 Create and manage a bank account
@@ -196,7 +206,8 @@ Calculate total deposits
 Calculate total withdrawals
 Calculate average transaction amount
 Find maximum and minimum transactions
-Handle insufficient balance and invalid amounts
+Handle insufficient balance
+Handle invalid transaction amounts
 Technologies Used
 Python
 Pandas
@@ -220,6 +231,7 @@ Banking Operations
 
 The application provides the following operations:
 
+===== OOP BANK ACCOUNT =====
 1. Deposit
 2. Withdraw
 3. Check Balance
@@ -237,6 +249,27 @@ Total withdrawals
 Average transaction amount
 Maximum transaction
 Minimum transaction
+Example
+===== OOP BANK ACCOUNT =====
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Transaction History
+5. Save Transactions
+6. Analyze CSV
+7. Exit
+
+Enter your choice: 1
+
+Enter deposit amount: 2000
+
+₹2000.00 deposited successfully
+Learning Objective
+
+The main objective of this project is to understand Object-Oriented Programming concepts in Python and apply them to a practical banking application.
+
+The project also introduces Pandas-based transaction analysis and CSV file handling.
+
 Week - 3 ETL Pipeline + Tests
 
 A Python-based ETL (Extract, Transform, Load) Pipeline that fetches data from a REST API, transforms the data using Pandas, and saves the processed data into a CSV file.
@@ -288,29 +321,43 @@ Pandas DataFrame
 LOAD
     ↓
 CSV File
-1. Extract
+Extract
 
 The requests library is used to fetch data from the REST API.
 
 response = requests.get(API_URL)
+response.raise_for_status()
+data = response.json()
 
-The JSON response is then converted into Python data.
+The API response contains JSON data that is passed to the transformation stage.
 
-2. Transform
+Transform
 
-The extracted data is converted into a Pandas DataFrame.
+The extracted JSON data is converted into a Pandas DataFrame.
 
 The transformation process includes:
 
 Selecting required columns
-Removing unnecessary data
 Cleaning title text
 Removing extra spaces
 Formatting titles
+Cleaning body text
 Calculating title length
 Calculating body length
 Removing duplicate records
-3. Load
+
+The original API data contains:
+
+userId
+id
+title
+body
+
+Additional columns are generated during transformation:
+
+title_length
+body_length
+Load
 
 The transformed DataFrame is saved as:
 
@@ -361,7 +408,7 @@ Run Unit Tests
 pytest -v test_etl.py
 ETL Functions
 
-The project contains the following main functions:
+The project contains the following main functions.
 
 extract_data()
 
@@ -381,19 +428,7 @@ Runs the complete Extract, Transform, and Load process.
 
 Data Transformation
 
-The original API data contains:
-
-userId
-id
-title
-body
-
-Additional columns are generated during transformation:
-
-title_length
-body_length
-
-The final dataset contains:
+The final dataset contains the following columns:
 
 Column	Description
 userId	User identifier
@@ -417,9 +452,12 @@ Title length calculation
 Body length calculation
 CSV file creation
 
-Run:
+Run the tests using:
 
 pytest -v test_etl.py
+Test Results
+
+The project contains 7 unit tests.
 
 Expected result:
 
@@ -436,7 +474,7 @@ test_etl.py::test_length_columns PASSED
 test_etl.py::test_load_data PASSED
 
 ============================== 7 passed ==============================
-Sample Output
+Sample ETL Output
 Starting ETL Pipeline...
 
 1. Extracting data from REST API...
@@ -469,6 +507,37 @@ ETL_Pipeline.ipynb
 The generated output is:
 
 etl_output.csv
+Google Colab Files
+
+For the Week 3 submission, the following files should be included:
+
+Week-3-ETL-Pipeline/
+│
+├── ETL_Pipeline.ipynb
+├── etl.py
+├── test_etl.py
+├── etl_output.csv
+└── README.md
+ETL_Pipeline.ipynb
+
+Contains the complete Google Colab implementation and execution results.
+
+etl.py
+
+Contains the main ETL pipeline functions.
+
+test_etl.py
+
+Contains the pytest unit tests.
+
+etl_output.csv
+
+Contains the transformed output generated by the ETL pipeline.
+
+README.md
+
+Contains the complete documentation for the project.
+
 DataGrokr Weekly Progress
 Week	Project	Main Concepts
 Week 1	CLI Grade Calculator	Python Fundamentals, Functions, Collections, File Handling
@@ -476,13 +545,17 @@ Week 2	OOP Bank Account	OOP, Classes, Pandas, CSV, Data Analysis
 Week 3	ETL Pipeline + Tests	REST API, Requests, Pandas, CSV, Pytest
 Skills Covered So Far
 Python
+│
 ├── Fundamentals
 ├── Variables and Data Types
 ├── Operators
 ├── Conditional Statements
 ├── Loops
 ├── Functions
-├── Lists / Tuples / Sets / Dictionaries
+├── Lists
+├── Tuples
+├── Sets
+├── Dictionaries
 ├── File Handling
 ├── Exception Handling
 ├── Object-Oriented Programming
@@ -493,4 +566,27 @@ Python
 └── Unit Testing with Pytest
 Learning Progress
 
-Through the first three weeks, the projects progress from basic Python programming to object-oriented programming, data analysis, API-based data extraction, ETL processing, and automated testing.
+Through the first three weeks of DataGrokr training, the projects progress from basic Python programming to Object-Oriented Programming, data analysis, REST API integration, ETL processing, and automated testing.
+
+Week 1
+
+Focused on Python fundamentals and building a command-line application.
+
+Week 2
+
+Focused on Object-Oriented Programming, classes, banking operations, CSV handling, and Pandas-based data analysis.
+
+Week 3
+
+Focused on REST API integration, data extraction, data transformation using Pandas, CSV loading, and automated testing using pytest.
+
+Technologies Covered
+Technology	Usage
+Python	Core programming language
+Pandas	Data processing and analysis
+Requests	REST API data extraction
+Pytest	Automated unit testing
+CSV	Data storage and processing
+REST API	External data source
+Google Colab	Development and execution environment
+GitHub	Project version control and documentation

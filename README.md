@@ -200,68 +200,86 @@ The program handles:
 - File input/output errors
 - Keyboard interruption
 
-## Learning Objective
+# DataGrokr – Week 2: OOP Bank Account
 
-The main objective of this project is to practice Python fundamentals by building a simple command-line application without using external frameworks or advanced concepts.
-# OOP Bank Account
+A beginner-friendly Python banking application built using **Object-Oriented Programming (OOP)**. This project supports deposits, withdrawals, balance checking, transaction history, CSV file handling, and transaction dataset analysis using Pandas.
 
-A simple **Object-Oriented Programming (OOP) Banking System** built using Python. The project allows users to perform basic banking operations such as deposits, withdrawals, balance checking, and transaction history management. It also uses **Pandas** to save and analyze transaction data stored in a CSV file.
+## Project Overview
+
+The OOP Bank Account project simulates basic banking operations through a menu-driven command-line interface. It stores transaction details and uses Pandas to analyze the saved CSV dataset.
 
 ## Features
 
 - Create and manage a bank account
-- Deposit money
-- Withdraw money
-- Check current balance
+- Deposit money into an account
+- Withdraw money from an account
+- Check the current account balance
 - View transaction history
-- Save transactions to a CSV file
+- Save transaction details to a CSV file
 - Analyze transaction data using Pandas
 - Calculate total transactions
-- Calculate total deposits
-- Calculate total withdrawals
+- Calculate total deposits and withdrawals
 - Calculate average transaction amount
-- Find maximum and minimum transactions
-- Handle insufficient balance and invalid amounts
+- Identify maximum and minimum transactions
+- Handle invalid amounts and insufficient balance
 
 ## Technologies Used
 
 - Python
+- Object-Oriented Programming (OOP)
 - Pandas
-- CSV
-- Object-Oriented Programming
+- CSV file handling
 
 ## Project Structure
 
 ```text
-OOP-Bank-Account/
+DataGrokr-Week-2/
 │
 ├── bank_account.py
 ├── transactions.csv
-├── README.md
-└── requirements.txt
+├── requirements.txt
+└── README.md
+```
 
-Installation
-Clone the repository:
-git clone https://github.com/your-username/OOP-Bank-Account.git
+## Installation
 
-Navigate to the project directory:
-cd OOP-Bank-Account
+### 1. Clone the Repository
 
-Install the required library:
-pip install pandas
+```bash
+git clone https://github.com/your-username/DataGrokr-Week-2.git
+```
 
-Or install using the requirements file:
+### 2. Navigate to the Project Directory
+
+```bash
+cd DataGrokr-Week-2
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Requirements
-Create a requirements.txt file:
+## Requirements
+
+Create a `requirements.txt` file containing:
+
+```text
 pandas
+```
 
-How to Run
-Run the Python program:
+## How to Run
+
+Execute the Python program using:
+
+```bash
 python bank_account.py
+```
 
-Menu Options
+## Menu Options
+
+```text
 ===== OOP BANK ACCOUNT =====
 1. Deposit
 2. Withdraw
@@ -270,86 +288,421 @@ Menu Options
 5. Save Transactions
 6. Analyze CSV
 7. Exit
+```
 
-1. Deposit
-Allows the user to deposit money into the account.
+## Example Execution
+
+### Deposit
+
+```text
 Enter your choice: 1
 Enter deposit amount: 2000
 ₹2000.00 deposited successfully
+```
 
-2. Withdraw
-Allows the user to withdraw money if sufficient balance is available.
+### Withdraw
+
+```text
 Enter your choice: 2
 Enter withdrawal amount: 566
 ₹566.00 withdrawn successfully
+```
 
-3. Check Balance
-Displays the current account balance.
+### Check Balance
+
+```text
+Enter your choice: 3
 Current Balance: ₹6434.00
+```
 
-4. Transaction History
-Displays all deposits and withdrawals.
+### Transaction History
+
+```text
+Enter your choice: 4
+
 Transaction History
 
 Date                  Type          Amount    Balance
 2026-09-17 10:03:58   Deposit       2000.0    7000.0
 2026-09-17 10:04:04   Withdrawal     566.0    6434.0
+```
 
-5. Save Transactions
-Saves the transaction history into:
-transactions.csv
+### Save Transactions
 
-6. Analyze CSV
-Uses Pandas to analyze the saved transaction dataset.
-The analysis includes:
-- Total Transactions
-- Total Deposits
-- Total Withdrawals
-- Average Transaction
-- Maximum Transaction
-- Minimum Transaction
-Make sure to select option 5 before option 6 so that transactions.csv is created.
-7. Exit
-Closes the banking application.
-OOP Concepts Used
-Class
-The BankAccount class represents a bank account.
-Constructor
-The constructor initializes:
-- Account number
-- Account holder name
-- Initial balance
-- Transaction history
-Encapsulation
-Account data and banking operations are grouped inside the BankAccount class.
-Methods
-The project uses methods such as:
-deposit()withdraw()check_balance()show_transactions()save_transactions()
+```text
+Enter your choice: 5
+Transactions saved to transactions.csv
+```
 
+### Analyze CSV Dataset
 
-Sample CSV
-The generated transactions.csv contains data similar to:
+```text
+Enter your choice: 6
+
+Total Transactions: 2
+Total Deposits: 2000.0
+Total Withdrawals: 566.0
+Average Transaction: 1283.0
+Maximum Transaction: 2000.0
+Minimum Transaction: 566.0
+```
+
+**Note:** Save the transaction history using option 5 before selecting option 6. The CSV file must exist for the analysis to work.
+
+## CSV Dataset
+
+The `transactions.csv` file stores the transaction date, type, amount, and account balance.
+
+Example:
+
+```csv
 Date,Type,Amount,Balance
 2026-09-17 10:03:58,Deposit,2000.0,7000.0
 2026-09-17 10:04:04,Withdrawal,566.0,6434.0
+```
 
-Learning Outcomes
-Through this project, I practiced:
-- Python classes and objects
-- Constructors and methods
-- Conditional statements
-- Loops
-- File handling
-- CSV data processing
+## Concepts Covered
+
+### 1. Classes and Objects
+
+The `BankAccount` class represents a bank account, and its objects maintain account details and transaction records.
+
+### 2. Constructor
+
+The `__init__()` method initializes the account number, account holder name, initial balance, and transaction history.
+
+### 3. Methods
+
+The project uses methods to perform banking operations:
+
+- `deposit()` – deposits money
+- `withdraw()` – withdraws money
+- `check_balance()` – displays the current balance
+- `show_transactions()` – displays transaction history
+- `save_transactions()` – saves transactions to CSV
+
+### 4. Conditional Statements
+
+Conditional statements validate transaction amounts and check whether sufficient balance is available for withdrawals.
+
+### 5. Loops
+
+A `while` loop repeatedly displays the menu until the user exits the application.
+
+### 6. File Handling
+
+CSV file handling stores transaction records for future analysis.
+
+### 7. Pandas Data Analysis
+
+Pandas reads the CSV dataset and calculates transaction statistics using DataFrames and aggregation functions.
+
+## Learning Outcomes
+
+By completing this project, I practiced:
+
+- Implementing Object-Oriented Programming in Python
+- Creating classes, objects, constructors, and methods
+- Building a menu-driven application
+- Performing deposit and withdrawal operations
+- Validating user input and transaction amounts
+- Reading and writing CSV files
+- Using Pandas DataFrames
+- Performing basic data analysis
+- Organizing Python projects for GitHub
+
+## Future Enhancements
+
+- Support multiple bank accounts
+- Add PIN-based authentication
+- Implement money transfers between accounts
+- Store account information in SQLite or MySQL
+- Add transaction search and filtering
+- Generate transaction summary charts
+- Develop a graphical user interface
+
+# Week 3 - ETL Pipeline + Tests
+
+A Python-based **ETL (Extract, Transform, Load) Pipeline** that extracts data from a REST API, transforms the data using Pandas, and loads the processed data into a CSV file. The project also includes automated unit testing using Pytest.
+
+## Features
+
+- Extract data from a REST API
+- Process JSON responses using Python Requests
+- Convert JSON data into a Pandas DataFrame
+- Select required columns
+- Clean and format text data
+- Remove duplicate records
+- Calculate title length and body length
+- Save transformed data to a CSV file
+- Perform automated testing using Pytest
+- Validate data transformation and CSV file creation
+
+## Technologies Used
+
+- Python
+- Pandas
+- Requests
+- Pytest
+- REST API
+- CSV
+- Google Colab
+
+## API Used
+
+The project uses the JSONPlaceholder REST API to retrieve sample post data.
+
+API URL: https://jsonplaceholder.typicode.com/posts
+
+## ETL Process
+
+The pipeline follows three main stages:
+
+```text
+REST API
+   |
+   v
+EXTRACT
+   |
+   v
+JSON Data
+   |
+   v
+TRANSFORM
+   |
+   v
+Pandas DataFrame
+   |
+   v
+LOAD
+   |
+   v
+etl_output.csv
+```
+
+### 1. Extract
+
+The Extract stage retrieves JSON data from the REST API using the Python Requests library.
+
+```python
+response = requests.get(API_URL)
+response.raise_for_status()
+data = response.json()
+```
+
+### 2. Transform
+
+The Transform stage converts the extracted data into a Pandas DataFrame and performs data cleaning.
+
+The operations include:
+
+- Selecting required columns
+- Removing extra spaces from text
+- Formatting titles
+- Cleaning body text
+- Calculating title length
+- Calculating body length
+- Removing duplicate records
+
+The original dataset contains the following columns:
+
+- `userId`
+- `id`
+- `title`
+- `body`
+
+The transformed dataset also includes:
+
+- `title_length`
+- `body_length`
+
+### 3. Load
+
+The Load stage saves the transformed data into a CSV file named `etl_output.csv`.
+
+The output file can be opened using Microsoft Excel, Google Sheets, or Pandas.
+
+## Project Structure
+
+```text
+Week-3-ETL-Pipeline/
+│
+├── ETL_Pipeline.ipynb
+├── etl.py
+├── test_etl.py
+├── etl_output.csv
+└── README.md
+```
+
+## File Description
+
+| File | Description |
+|---|---|
+| `ETL_Pipeline.ipynb` | Google Colab notebook containing the ETL implementation and execution results |
+| `etl.py` | Contains the Extract, Transform, and Load functions |
+| `test_etl.py` | Contains automated unit tests using Pytest |
+| `etl_output.csv` | Stores the transformed dataset |
+| `README.md` | Project documentation |
+
+## Requirements
+
+Install the required Python libraries using:
+
+```bash
+pip install pandas requests pytest
+```
+
+In Google Colab, run:
+
+```python
+!pip install pandas requests pytest -q
+```
+
+## How to Run
+
+### Step 1: Run the ETL Pipeline
+
+Run the following command in your terminal from the project directory:
+
+```bash
+python etl.py
+```
+
+The pipeline extracts data from the API, transforms it using Pandas, and saves the output to `etl_output.csv`.
+
+### Step 2: Run Unit Tests
+
+Execute the following command:
+
+```bash
+pytest -v test_etl.py
+```
+
+Pytest runs the test cases and displays whether each test passes or fails.
+
+## ETL Functions
+
+The project contains four main functions.
+
+### `extract_data()`
+
+Fetches data from the REST API and returns the extracted JSON data.
+
+### `transform_data()`
+
+Converts the extracted data into a Pandas DataFrame and performs data cleaning and transformation.
+
+### `load_data()`
+
+Saves the transformed DataFrame into a CSV file.
+
+### `run_etl()`
+
+Executes the complete ETL process by calling the Extract, Transform, and Load functions.
+
+## Data Transformation
+
+The final dataset contains the following columns:
+
+| Column | Description |
+|---|---|
+| `userId` | Identifier of the user who created the post |
+| `id` | Unique post identifier |
+| `title` | Cleaned and formatted post title |
+| `body` | Cleaned post body |
+| `title_length` | Number of characters in the title |
+| `body_length` | Number of characters in the body |
+
+## Testing with Pytest
+
+Pytest is used to verify the correctness of the ETL pipeline.
+
+The tests check:
+
+- Whether the transformation function returns a DataFrame
+- Whether the expected columns exist
+- Whether title formatting works correctly
+- Whether body text is cleaned correctly
+- Whether duplicate records are removed
+- Whether title and body lengths are calculated correctly
+- Whether the CSV output file is created successfully
+
+Run the tests using:
+
+```bash
+pytest -v test_etl.py
+```
+
+A successful run should report that all seven tests passed, assuming the test file contains the seven test cases and the implementation is correct.
+
+## Sample Output
+
+An example of the pipeline output is shown below. The exact messages depend on the implementation.
+
+```text
+Starting ETL Pipeline...
+
+1. Extracting data from REST API...
+Records fetched: 100
+
+2. Transforming data...
+Transformation completed.
+
+3. Loading data into CSV...
+CSV saved: etl_output.csv
+
+ETL Pipeline completed successfully.
+```
+
+## Running in Google Colab
+
+The project can also be executed in Google Colab.
+
+The notebook should include:
+
+1. Installing the required libraries
+2. Creating the ETL implementation
+3. Extracting data from the REST API
+4. Transforming the data using Pandas
+5. Saving the output to CSV
+6. Creating the Pytest test file
+7. Running the automated tests
+8. Displaying the transformed data
+
+Save the notebook as `ETL_Pipeline.ipynb`.
+
+For GitHub, include the notebook, Python source files, test file, and generated CSV output.
+
+## Learning Objectives
+
+Through this project, I learned how to:
+
+- Work with REST APIs
+- Extract JSON data using Requests
+- Process datasets using Pandas
+- Clean and transform data
+- Save processed data to CSV
+- Organize Python code into reusable functions and modules
+- Write automated unit tests using Pytest
+- Validate data processing and file output
+- Execute Python projects using Google Colab
+
+## Skills Covered
+
+- Python Programming
+- REST API Integration
+- JSON Data Processing
 - Pandas DataFrames
-- Basic dataset analysis
-- Menu-driven Python applications
-- Object-Oriented Programming
-Future Enhancements
-- Multiple user accounts
-- Account authentication using PIN
-- Money transfer between accounts
-- Interest calculation
-- SQLite/MySQL database integration
-- Graphical user interface
-- Login and account registration system
+- Data Cleaning
+- ETL Pipeline Development
+- CSV File Handling
+- Unit Testing
+- Pytest
+- Google Colab
+- Debugging and Error Handling
+
+## Week 3 Summary
+
+This project demonstrates a complete ETL workflow using Python. Data is extracted from a REST API, transformed using Pandas, and loaded into a CSV file. Pytest is used to validate the data transformation and file-loading functionality.
+
+The project builds practical skills in data processing, API integration, modular programming, and automated testing.

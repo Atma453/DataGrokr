@@ -706,3 +706,256 @@ Through this project, I learned how to:
 This project demonstrates a complete ETL workflow using Python. Data is extracted from a REST API, transformed using Pandas, and loaded into a CSV file. Pytest is used to validate the data transformation and file-loading functionality.
 
 The project builds practical skills in data processing, API integration, modular programming, and automated testing.
+
+# DataGrokr – Week 4: SQL Fundamentals
+
+A beginner-friendly SQL practice project covering data retrieval, filtering, sorting, NULL handling, aggregate functions, grouping, joins, conditional statements, string and date functions, and table creation and modification.
+
+## Topics Covered
+
+- SELECT, WHERE, ORDER BY, LIMIT and column aliases
+- NULL handling using COALESCE, NULLIF, IS NULL and IS NOT NULL
+- Aggregate functions: COUNT, SUM, AVG, MIN and MAX
+- GROUP BY and HAVING
+- SQL JOINs: INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL OUTER JOIN
+- CASE WHEN statements
+- String functions and date/time functions
+- DDL commands: CREATE TABLE, ALTER TABLE and DROP TABLE
+- SQL constraints: PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE and CHECK
+- Predict-the-output questions
+- Query-writing practice
+
+## Project Structure
+
+```text
+Week_4_SQL/
+├── README.md
+└── Week_4_SQL_Queries.sql
+```
+
+## Technologies Used
+
+- SQL
+- MySQL 8.0+
+- MySQL Workbench
+- Git and GitHub
+
+## Database Tables
+
+This project uses two main tables.
+
+### 1. Employees
+
+| Column | Description |
+|---|---|
+| emp_id | Employee ID and primary key |
+| emp_name | Employee name |
+| salary | Employee salary |
+| dept_id | Department ID |
+| city | Employee's city |
+| manager_id | Employee's manager ID |
+| join_date | Date the employee joined |
+| bonus | Employee bonus |
+
+### 2. Departments
+
+| Column | Description |
+|---|---|
+| dept_id | Department ID and primary key |
+| dept_name | Department name |
+
+The `Employees` table uses a foreign key to reference the `Departments` table.
+
+## SQL Concepts and Examples
+
+### 1. SELECT and WHERE
+
+Used to retrieve records and filter data based on conditions.
+
+```sql
+SELECT * FROM Employees;
+
+SELECT emp_name, salary
+FROM Employees
+WHERE salary > 50000;
+```
+
+### 2. ORDER BY, LIMIT and Aliases
+
+Used to sort query results, restrict the number of rows, and rename output columns.
+
+```sql
+SELECT emp_name AS Name, salary AS Monthly_Salary
+FROM Employees
+ORDER BY salary DESC
+LIMIT 3;
+```
+
+### 3. NULL Handling
+
+Used to check missing values and provide alternative values.
+
+```sql
+SELECT *
+FROM Employees
+WHERE bonus IS NULL;
+
+SELECT emp_name, COALESCE(bonus, 0) AS Bonus
+FROM Employees;
+
+SELECT NULLIF(100, 100) AS Result;
+```
+
+### 4. Aggregate Functions
+
+Used to calculate summaries from table data.
+
+```sql
+SELECT COUNT(*) AS Total_Employees
+FROM Employees;
+
+SELECT SUM(salary) AS Total_Salary
+FROM Employees;
+
+SELECT AVG(salary) AS Average_Salary
+FROM Employees;
+
+SELECT MAX(salary) AS Highest_Salary,
+       MIN(salary) AS Lowest_Salary
+FROM Employees;
+```
+
+### 5. GROUP BY and HAVING
+
+Used to group records and filter groups based on aggregate conditions.
+
+```sql
+SELECT dept_id, COUNT(*) AS Employee_Count
+FROM Employees
+GROUP BY dept_id
+HAVING COUNT(*) > 1;
+```
+
+### 6. SQL JOINs
+
+Used to retrieve related information from multiple tables.
+
+```sql
+SELECT e.emp_name, d.dept_name
+FROM Employees e
+INNER JOIN Departments d
+ON e.dept_id = d.dept_id;
+```
+
+The project includes examples of INNER JOIN, LEFT JOIN, RIGHT JOIN, a FULL OUTER JOIN equivalent for MySQL, and SELF JOIN.
+
+### 7. CASE WHEN
+
+Used to apply conditional logic in query results.
+
+```sql
+SELECT emp_name, salary,
+       CASE
+           WHEN salary >= 60000 THEN 'High'
+           WHEN salary >= 50000 THEN 'Medium'
+           ELSE 'Low'
+       END AS Salary_Category
+FROM Employees;
+```
+
+### 8. String and Date Functions
+
+Used to manipulate text and extract date information.
+
+```sql
+SELECT UPPER(emp_name) AS Employee_Name
+FROM Employees;
+
+SELECT CONCAT(emp_name, ' - ', city) AS Details
+FROM Employees;
+
+SELECT emp_name, YEAR(join_date) AS Joining_Year
+FROM Employees;
+```
+
+### 9. DDL Commands
+
+Used to create, modify and remove database objects.
+
+```sql
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50) NOT NULL,
+    age INT CHECK (age >= 18),
+    email VARCHAR(100) UNIQUE
+);
+
+ALTER TABLE Students
+ADD COLUMN city VARCHAR(50);
+```
+
+## Important Practice Queries
+
+The SQL file contains 52 numbered practice queries covering:
+
+1. Retrieving and filtering employee records
+2. Sorting salaries and selecting the top three employees
+3. Handling NULL values
+4. Calculating total and average salaries
+5. Grouping employees by department
+6. Filtering departments using HAVING
+7. Joining employees with departments
+8. Displaying employee and manager names
+9. Categorizing salaries using CASE WHEN
+10. Working with string and date functions
+11. Creating and modifying database tables
+12. Finding the second-highest salary
+13. Finding the highest-paid employee
+14. Counting employees by city
+15. Finding employees who joined during 2024
+
+## Key Differences to Remember
+
+| Concept | Purpose |
+|---|---|
+| WHERE | Filters rows before grouping |
+| HAVING | Filters groups after grouping |
+| COUNT(*) | Counts rows |
+| COUNT(column) | Counts non-NULL values in a column |
+| INNER JOIN | Returns matching rows |
+| LEFT JOIN | Returns all left-table rows and matching right-table rows |
+| COALESCE() | Returns the first non-NULL value |
+| NULLIF() | Returns NULL when two expressions are equal |
+| PRIMARY KEY | Uniquely identifies each row |
+| FOREIGN KEY | Establishes a relationship between tables |
+
+## How to Run the Project
+
+1. Install MySQL Server and MySQL Workbench.
+2. Open `Week_4_SQL_Queries.sql` in MySQL Workbench.
+3. Connect to your MySQL database server.
+4. Execute the script to create the sample tables and insert data.
+5. Run individual queries to practise each concept.
+6. Attempt the output-prediction questions before executing them.
+
+**Note:** The script uses MySQL syntax. The initial setup drops existing `Employees` and `Departments` tables with those names, so back up important data before running it. The `Students` table is created later in the script, and the final DROP TABLE example is commented out.
+
+## Learning Outcomes
+
+After completing Week 4, I can:
+
+- Retrieve, filter and sort database records.
+- Handle NULL values correctly.
+- Use aggregate functions to summarize data.
+- Group records and filter aggregated results.
+- Join related tables to retrieve combined information.
+- Apply conditional logic using CASE WHEN.
+- Use common string and date functions.
+- Create and modify tables using DDL commands.
+- Write SQL queries for practical problems.
+- Predict SQL query outputs.
+
+## Repository File
+
+- `Week_4_SQL_Queries.sql` – Contains sample table creation, sample data, SQL examples, output-prediction practice and query-writing exercises.
+

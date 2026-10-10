@@ -959,3 +959,438 @@ After completing Week 4, I can:
 
 - `Week_4_SQL_Queries.sql` – Contains sample table creation, sample data, SQL examples, output-prediction practice and query-writing exercises.
 
+# DataGrokr — Week 5: Intermediate + Advanced SQL
+
+## Overview
+
+Week 5 focuses on intermediate and advanced SQL concepts, including subqueries, database normalization, window functions, recursive CTEs, set operations, grouping operations, views, and materialized views.
+
+## Topics Covered
+
+1. Scalar Subqueries
+2. Correlated Subqueries
+3. EXISTS and NOT EXISTS
+4. Database Normalization — 1NF, 2NF, and 3NF
+5. Window Functions — ROW_NUMBER, RANK, and DENSE_RANK
+6. LAG and LEAD
+7. Window Frames
+8. Recursive CTEs
+9. UNION, INTERSECT, and EXCEPT
+10. ROLLUP, CUBE, and GROUPING SETS
+11. Standard Views
+12. Materialized Views
+
+## Technologies Used
+
+- SQL
+- MySQL 8.0+
+- MySQL Workbench
+- Git and GitHub
+
+## Database Setup
+
+The assignment uses a sample database named `datagrokr_week5`.
+
+```sql
+CREATE DATABASE IF NOT EXISTS datagrokr_week5;
+USE datagrokr_week5;
+```
+
+### Tables Created
+
+| Table | Description |
+|---|---|
+| `departments` | Stores department details |
+| `employees` | Stores employee details and salaries |
+| `customers` | Stores customer information |
+| `orders` | Stores customer order information |
+| `products` | Stores product names, categories, and prices |
+
+## 1. Subqueries
+
+Subqueries are SQL queries nested inside another SQL query.
+
+### Scalar Subquery
+
+Returns a single value.
+
+```sql
+SELECT employee_name, salary
+FROM employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees
+);
+```
+
+### Correlated Subquery
+
+Uses values from the outer query.
+
+```sql
+SELECT e.employee_name, e.salary
+FROM employees e
+WHERE e.salary > (
+    SELECT AVG(e2.salary)
+    FROM employees e2
+    WHERE e2.department_id = e.department_id
+);
+```
+
+## 2. EXISTS and NOT EXISTS
+
+`EXISTS` checks whether a subquery returns rows. `NOT EXISTS` checks whether it returns no rows.
+
+```sql
+SELECT c.customer_name
+FROM customers c
+WHERE EXISTS (
+    SELECT 1
+    FROM orders o
+    WHERE o.customer_id = c.customer_id
+);
+```
+
+Find customers who have never placed an order.
+
+```sql
+SELECT c.customer_name
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM orders o
+    WHERE o.customer_id = c.customer_id
+);
+```
+
+## 3. Database Normalization
+
+Normalization organizes database tables to reduce unnecessary duplication and maintain data integrity.
+
+- **1NF:** Each column contains atomic values, without repeating groups.
+- **2NF:** The table is in 1NF, and non-key attributes depend on the entire candidate key.
+- **3NF:** The table is in 2NF and has no transitive dependencies of non-key attributes on a candidate key.
+
+Example of separating students, courses, instructors, and enrollments:
+
+```sql
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(100)
+);
+
+CREATE TABLE instructors (
+    instructor_id INT PRIMARY KEY,
+    instructor_name VARCHAR(100)
+);
+
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100),
+    instructor_id INT,
+    FOREIGN KEY (instructor_id)
+        REFERENCES instructors(instructor_id)
+);
+
+CREATE TABLE enrollments (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+```
+
+## 4. Window Functions
+
+Window functions perform calculations across related rows without collapsing them into a single result row.
+
+### ROW_NUMBER
+
+Assigns a unique sequential number to each row.
+
+```sql
+SELECT employee_name, salary,
+       ROW_NUMBER() OVER (
+           ORDER BY salary DESC
+       ) AS row_num
+FROM employees;
+```
+
+### RANK
+
+Assigns ranks to rows, leaving gaps after ties.
+
+```sql
+SELECT employee_name, salary,
+       RANK() OVER (
+           ORDER BY salary DESC
+       ) AS salary_rank
+FROM employees;
+```
+
+### DENSE_RANK
+
+Assigns ranks without gaps after ties.
+
+```sql
+SELECT employee_name, salary,
+       DENSE_RANK() OVER (
+           ORDER BY salary DESC
+       ) AS salary_rank
+FROM employees;
+```
+
+### PARTITION BY
+
+Ranks employees separately within each department.
+
+```sql
+SELECT employee_name, department_id, salary,
+       RANK() OVER (
+           PARTITION BY department_id
+           ORDER BY salary DESC
+       ) AS department_rank
+FROM employees;
+```
+
+## 5. LAG and LEAD
+
+`LAG` accesses a previous row, while `LEAD` accesses a following row within the window order.
+
+```sql
+SELECT employee_name, salary,
+       LAG(salary) OVER (
+           ORDER BY salary
+       ) AS previous_salary,
+       LEAD(salary) OVER (
+           ORDER BY salary
+       ) AS next_salary
+FROM employees;
+```
+
+## 6. Window Frames
+
+Window frames define which rows contribute to a window calculation.
+
+### Running Total
+
+```sql
+SELECT order_id, order_date, amount,
+       SUM(amount) OVER (
+           ORDER BY order_date, order_id
+           ROWS BETWEEN UNBOUNDED PRECEDING
+           AND CURRENT ROW
+       ) AS running_total
+FROM orders;
+```
+
+### Moving Average
+
+```sql
+SELECT order_id, amount,
+       AVG(amount) OVER (
+           ORDER BY order_date, order_id
+           ROWS BETWEEN 2 PRECEDING
+           AND CURRENT ROW
+       ) AS moving_average
+FROM orders;
+```
+
+## 7. Recursive CTEs
+
+Recursive Common Table Expressions repeatedly execute a query to generate or traverse related data.
+
+Example: Generate numbers from 1 to 10.
+
+```sql
+WITH RECURSIVE numbers AS (
+    SELECT 1 AS n
+
+    UNION ALL
+
+    SELECT n + 1
+    FROM numbers
+    WHERE n < 10
+)
+SELECT n
+FROM numbers;
+```
+
+## 8. UNION, INTERSECT, and EXCEPT
+
+### UNION
+
+Combines two result sets and removes duplicates.
+
+```sql
+SELECT city FROM customers
+WHERE city = 'Bengaluru'
+
+UNION
+
+SELECT city FROM customers
+WHERE city = 'Mysuru';
+```
+
+### UNION ALL
+
+Combines result sets while retaining duplicates.
+
+```sql
+SELECT city FROM customers
+WHERE city = 'Bengaluru'
+
+UNION ALL
+
+SELECT city FROM customers
+WHERE city = 'Mysuru';
+```
+
+### INTERSECT
+
+Returns rows common to both result sets. MySQL 8.0 requires an alternative such as `EXISTS` or a join.
+
+### EXCEPT
+
+Returns rows from the first result set that are absent from the second. MySQL 8.0 requires an alternative such as `NOT EXISTS`.
+
+```sql
+SELECT c.customer_id
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM orders o
+    WHERE o.customer_id = c.customer_id
+);
+```
+
+## 9. ROLLUP, CUBE, and GROUPING SETS
+
+These operations calculate subtotals and grand totals at different grouping levels.
+
+### ROLLUP in MySQL
+
+```sql
+SELECT category, SUM(price) AS total_price
+FROM products
+GROUP BY category WITH ROLLUP;
+```
+
+### CUBE and GROUPING SETS
+
+MySQL 8.0 does not support native `CUBE` or `GROUPING SETS`. These operations are available in PostgreSQL and other compatible database systems.
+
+PostgreSQL example:
+
+```sql
+SELECT category, SUM(price) AS total_price
+FROM products
+GROUP BY CUBE(category);
+```
+
+```sql
+SELECT category, SUM(price) AS total_price
+FROM products
+GROUP BY GROUPING SETS (
+    (category),
+    ()
+);
+```
+
+## 10. Standard Views
+
+A view is a virtual table based on a stored SQL query.
+
+```sql
+CREATE OR REPLACE VIEW employee_salary_view AS
+SELECT e.employee_id,
+       e.employee_name,
+       d.department_name,
+       e.salary
+FROM employees e
+JOIN departments d
+    ON e.department_id = d.department_id;
+```
+
+Retrieve records from the view.
+
+```sql
+SELECT *
+FROM employee_salary_view;
+```
+
+Find employees earning more than 70,000.
+
+```sql
+SELECT employee_name, salary
+FROM employee_salary_view
+WHERE salary > 70000;
+```
+
+## 11. Materialized Views
+
+A materialized view stores the results of a query for later retrieval. MySQL 8.0 does not provide native materialized views, so a summary table can be used as an alternative.
+
+```sql
+CREATE TABLE department_salary_summary AS
+SELECT d.department_id,
+       d.department_name,
+       COUNT(e.employee_id) AS employee_count,
+       COALESCE(SUM(e.salary), 0) AS total_salary,
+       COALESCE(AVG(e.salary), 0) AS average_salary
+FROM departments d
+LEFT JOIN employees e
+    ON d.department_id = e.department_id
+GROUP BY d.department_id, d.department_name;
+```
+
+View the summary.
+
+```sql
+SELECT *
+FROM department_salary_summary;
+```
+
+The summary table must be refreshed when the underlying data changes. The SQL assignment file includes commands for rebuilding it.
+
+## How to Run the Assignment
+
+1. Install MySQL Server and MySQL Workbench.
+2. Download the `DataGrokr_Week5.sql` file.
+3. Open the SQL script in MySQL Workbench.
+4. Connect to your MySQL server.
+5. Execute the script from beginning to end.
+6. Check the output of each query.
+7. Practise the queries individually to understand the results.
+
+**Note:** The SQL file uses MySQL 8.0+ and includes database-specific alternatives for features that MySQL does not support natively.
+
+## Learning Outcomes
+
+After completing Week 5, I can:
+
+- Write scalar and correlated subqueries.
+- Use `EXISTS` and `NOT EXISTS`.
+- Understand database normalization from 1NF to 3NF.
+- Apply ranking and analytical window functions.
+- Compare rows using `LAG` and `LEAD`.
+- Calculate running totals and moving averages.
+- Generate sequences and hierarchies using recursive CTEs.
+- Combine and compare result sets.
+- Calculate subtotals and grand totals.
+- Create views and summary tables.
+
+## Project Files
+
+```text
+DataGrokr/
+└── Week-5/
+    ├── README.md
+    └── DataGrokr_Week5.sql
+```
+
+## Conclusion
+
+Week 5 builds advanced SQL skills for data analysis, reporting, database design, and query optimization. These concepts are useful for data analytics, data engineering, and database development.
+

@@ -203,3 +203,153 @@ The program handles:
 ## Learning Objective
 
 The main objective of this project is to practice Python fundamentals by building a simple command-line application without using external frameworks or advanced concepts.
+# OOP Bank Account
+
+A simple **Object-Oriented Programming (OOP) Banking System** built using Python. The project allows users to perform basic banking operations such as deposits, withdrawals, balance checking, and transaction history management. It also uses **Pandas** to save and analyze transaction data stored in a CSV file.
+
+## Features
+
+- Create and manage a bank account
+- Deposit money
+- Withdraw money
+- Check current balance
+- View transaction history
+- Save transactions to a CSV file
+- Analyze transaction data using Pandas
+- Calculate total transactions
+- Calculate total deposits
+- Calculate total withdrawals
+- Calculate average transaction amount
+- Find maximum and minimum transactions
+- Handle insufficient balance and invalid amounts
+
+## Technologies Used
+
+- Python
+- Pandas
+- CSV
+- Object-Oriented Programming
+
+## Project Structure
+
+```text
+OOP-Bank-Account/
+│
+├── bank_account.py
+├── transactions.csv
+├── README.md
+└── requirements.txt
+
+Installation
+Clone the repository:
+git clone https://github.com/your-username/OOP-Bank-Account.git
+
+Navigate to the project directory:
+cd OOP-Bank-Account
+
+Install the required library:
+pip install pandas
+
+Or install using the requirements file:
+pip install -r requirements.txt
+
+Requirements
+Create a requirements.txt file:
+pandas
+
+How to Run
+Run the Python program:
+python bank_account.py
+
+Menu Options
+===== OOP BANK ACCOUNT =====
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Transaction History
+5. Save Transactions
+6. Analyze CSV
+7. Exit
+
+1. Deposit
+Allows the user to deposit money into the account.
+Enter your choice: 1
+Enter deposit amount: 2000
+₹2000.00 deposited successfully
+
+2. Withdraw
+Allows the user to withdraw money if sufficient balance is available.
+Enter your choice: 2
+Enter withdrawal amount: 566
+₹566.00 withdrawn successfully
+
+3. Check Balance
+Displays the current account balance.
+Current Balance: ₹6434.00
+
+4. Transaction History
+Displays all deposits and withdrawals.
+Transaction History
+
+Date                  Type          Amount    Balance
+2026-09-17 10:03:58   Deposit       2000.0    7000.0
+2026-09-17 10:04:04   Withdrawal     566.0    6434.0
+
+5. Save Transactions
+Saves the transaction history into:
+transactions.csv
+
+6. Analyze CSV
+Uses Pandas to analyze the saved transaction dataset.
+The analysis includes:
+- Total Transactions
+- Total Deposits
+- Total Withdrawals
+- Average Transaction
+- Maximum Transaction
+- Minimum Transaction
+Make sure to select option 5 before option 6 so that transactions.csv is created.
+7. Exit
+Closes the banking application.
+OOP Concepts Used
+Class
+The BankAccount class represents a bank account.
+Constructor
+The constructor initializes:
+- Account number
+- Account holder name
+- Initial balance
+- Transaction history
+Encapsulation
+Account data and banking operations are grouped inside the BankAccount class.
+Methods
+The project uses methods such as:
+deposit()withdraw()check_balance()show_transactions()save_transactions()
+
+
+Sample CSV
+The generated transactions.csv contains data similar to:
+Date,Type,Amount,Balance
+2026-09-17 10:03:58,Deposit,2000.0,7000.0
+2026-09-17 10:04:04,Withdrawal,566.0,6434.0
+
+Learning Outcomes
+Through this project, I practiced:
+- Python classes and objects
+- Constructors and methods
+- Conditional statements
+- Loops
+- File handling
+- CSV data processing
+- Pandas DataFrames
+- Basic dataset analysis
+- Menu-driven Python applications
+- Object-Oriented Programming
+Future Enhancements
+- Multiple user accounts
+- Account authentication using PIN
+- Money transfer between accounts
+- Interest calculation
+- SQLite/MySQL database integration
+- Graphical user interface
+- Login and account registration system
